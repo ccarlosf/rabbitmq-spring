@@ -14,7 +14,7 @@ import java.util.HashMap;
 
 @RunWith(SpringRunner.class)
 @SpringBootTest
-public class RabbitmqSpringApplicationTests {
+public class ApplicationTests {
 
     @Test
     public void contextLoads() {
