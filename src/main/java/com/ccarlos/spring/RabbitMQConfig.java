@@ -1,5 +1,7 @@
 package com.ccarlos.spring;
 
+import com.ccarlos.spring.adapter.MessageDelegate;
+import com.ccarlos.spring.convert.TextMessageConverter;
 import com.rabbitmq.client.Channel;
 import org.springframework.amqp.core.*;
 import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
@@ -123,13 +125,21 @@ public class RabbitMQConfig {
             }
         });
 
-        container.setMessageListener(new ChannelAwareMessageListener() {
+        // 1 适配器方式. 默认是有自己的方法名字的：handleMessage
+        // 可以自己指定一个方法的名字: consumeMessage
+        // 也可以添加一个转换器: 从字节数组转换为String
+        MessageListenerAdapter adapter = new MessageListenerAdapter(new MessageDelegate());
+        adapter.setDefaultListenerMethod("consumeMessage");
+        adapter.setMessageConverter(new TextMessageConverter());
+        container.setMessageListener(adapter);
+
+      /*  container.setMessageListener(new ChannelAwareMessageListener() {
             @Override
             public void onMessage(Message message, Channel channel) throws Exception {
                 String msg = new String(message.getBody());
                 System.err.println("----------消费者: " + msg);
             }
-        });
+        });*/
 
         return container;
     }
