@@ -97,4 +97,11 @@ public class RabbitMQConfig {
         return new Queue("pdf_queue", true); //队列持久
     }
 
+    @Bean
+    public RabbitTemplate rabbitTemplate(ConnectionFactory connectionFactory) {
+        RabbitTemplate rabbitTemplate = new RabbitTemplate(connectionFactory);
+        return rabbitTemplate;
+    }
+
+
 }
