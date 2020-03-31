@@ -30,7 +30,7 @@ public class MessageDelegate {
     }
 
 
-    /*public void consumeMessage(Map messageBody) {
+    public void consumeMessage(Map messageBody) {
         System.err.println("map方法, 消息内容:" + messageBody);
     }
 
@@ -49,6 +49,6 @@ public class MessageDelegate {
 
     public void consumeMessage(File file) {
         System.err.println("文件对象 方法, 消息内容:" + file.getName());
-    }*/
+    }
 
 }
